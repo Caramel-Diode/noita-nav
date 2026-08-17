@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Noita,导航,资源,工具">
+  <meta name="description" content="Noita一站式门户页">
+  <title>Noita 导航</title>
+  <style>
+    :root {
+      --bg: #0d0d12;
+      --panel: #16161e80;
+      --accent: #7b68ee;
+      --accent2: #ff6b6b;
+      --text: #c8c8d0;
+      --text-dim: #666;
+      --border: #2a2a3a;
+      --glow: rgba(123, 104, 238, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Courier New", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 10px 20px;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      user-select: none;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--glow), 0 0 30px var(--glow);
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: var(--text-dim);
+      font-size: 10px;
+    }
+
+    search {
+      max-width: 480px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    search input {
+      width: 100%;
+      padding: 14px 20px 14px 44px;
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 11px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--glow);
+    }
+
+    search::before {
+      content: '🔍';
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      opacity: .5;
+    }
+
+    #list,
+    #list li {
+      display: contents;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      padding: 18px;
+      cursor: pointer;
+      transition: transform .15s, border-color .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      outline: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover,
+    .card:focus {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px var(--glow);
+    }
+
+    h3 {
+      font-size: 12px;
+      color: #f0f0f0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 10px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(123, 104, 238, 0.1);
+      border: 1px solid rgba(123, 104, 238, 0.25);
+      border-radius: 2px;
+      font-size: 8px;
+      color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 9px;
+      user-select: none;
+    }
+
+    @keyframes flicker {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .7
+      }
+    }
+
+    h1 {
+      animation: flicker 3s infinite;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+  <script type="application/json" id="urlDatas">
+[
+  {
+    "title": "游戏官网",
+    "url": "https://noitagame.com/",
+    "icon": "🏠",
+    "desc": "Noita 官方网站，购买游戏与查看更新日志。",
+    "tags": ["官网"]
+  },
+  {
+    "title": "Noita 魔法群 Ng+",
+    "url": "https://qm.qq.com/q/GFIpVMMrAY",
+    "icon": "🐧",
+    "desc": "QQ 交流群(1055960762)",
+    "tags": ["社区"]
+  },
+  {
+    "title": "Noita 交流总群",
+    "url": "https://qm.qq.com/q/cgseI24sKc",
+    "icon": "🐧",
+    "desc": "Noita 交流群(665106616)",
+    "tags": ["社区"]
+  },
+  {
+    "title": "Noita 吧",
+    "url": "https://tieba.baidu.com/f?kw=noita",
+    "icon": "📌",
+    "desc": "百度贴吧 Noita 吧，攻略、水贴、求助与讨论。",
+    "tags": ["社区"]
+  },
+  {
+    "title": "中文 Wiki",
+    "url": "https://noita.wiki.gg/zh/wiki/Noita_Wiki",
+    "icon": "📖",
+    "desc": "noita.wiki.gg 中文站，敌人图鉴、法术详解、区域介绍与世界观",
+    "tags": ["Wiki"]
+  },
+  {
+    "title": "在线地图",
+    "url": "https://noitamap.com/",
+    "icon": "🗺",
+    "desc": "noitamap.com，可缩放交互世界地图，标记魔球、boss、商店与隐藏房间。",
+    "tags": ["地图", "工具"]
+  },
+  {
+    "title": "死亡地点统计可视化",
+    "url": "https://kamiheku.github.io/noited/",
+    "icon": "💀",
+    "desc": "死亡地点热力图可视化，分析你的暴毙规律。",
+    "tags": ["地图", "工具"]
+  },
+  {
+    "title": "Noita Wand Atlas",
+    "url": "https://pudy248.github.io/noitaWandAtlas",
+    "icon": "🪄",
+    "desc": "查找 26+ 格数魔杖，魔杖图鉴与属性筛选工具。",
+    "tags": ["魔杖", "工具"]
+  },
+  {
+    "title": "Noita Orb Atlas",
+    "url": "https://kaliuresis.github.io/noa/",
+    "icon": "🔮",
+    "desc": "查找大宝箱魔球位置，魔球分布与收集辅助。",
+    "tags": ["魔球", "工具"]
+  },
+  {
+    "title": "noitool",
+    "url": "https://www.noitool.com/",
+    "icon": "🌱",
+    "desc": "种子查询工具，输入种子查看地图布局、圣山位置与特殊地形。",
+    "tags": ["种子", "工具"]
+  },
+  {
+    "title": "在线魔杖模拟器",
+    "url": "https://asmallhamis.github.io/TheWebWandEngine/",
+    "icon": "⚡",
+    "desc": "在线搭建魔杖配方，生成可视化执行树。",
+    "tags": ["魔杖", "模拟"]
+  },
+  {
+    "title": "投射物永久化计算器",
+    "url": "https://caramel-diode.github.io/Noita_Tutorial/html/proj-inf-calc-3.4.html",
+    "icon": "🧮",
+    "desc": "投射物永久化计算器，计算法术配置下的永久化条件与参数。",
+    "tags": ["计算", "工具"]
+  },
+  {
+    "title": "Salakieli 文件编辑器",
+    "url": "https://lightbourn.net/games/Noita/editor.html",
+    "icon": "📝",
+    "desc": "存档加密文件编辑器，在线解密与修改 Noita 存档数据。",
+    "tags": ["存档", "工具"]
+  },
+  {
+    "title": "施法教学文档",
+    "url": "https://bdtgd.xyz/",
+    "icon": "🧪",
+    "desc": "施法机制深度解析，从入门到精通法杖构建。",
+    "tags": ["教程"]
+  },
+  {
+    "title": "法术+天赋投票",
+    "url": "https://spelltier.noita.xyz/",
+    "icon": "🗳",
+    "desc": "在线法术与天赋投票排名，看看社区最爱。",
+    "tags": ["投票", "其它"]
+  },
+  {
+    "title": "全进展图鉴",
+    "url": "https://ipeterov.github.io/noita-progress/",
+    "icon": "📊",
+    "desc": "图鉴式查看所有进展。",
+    "tags": ["图鉴", "工具"]
+  }
+]
+  </script>
+</head>
+
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <header>
+    <h1>NOITA NAV</h1>
+    <p>小女巫的百宝箱</p>
+  </header>
+  <search>
+    <input type="text" id="search" placeholder="搜索..." autocomplete="off">
+  </search>
+  <nav aria-label="Noita 资源导航">
+    <ul id="list"></ul>
+  </nav>
+  <footer>
+    <p>NOITA NAV</p>
+    <p style="margin-top:8px;">Made with Kimi</p>
+  </footer>
+  <script>
+    链接初始化: {
+      /** @type {Array} */
+      const items = JSON.parse(document.getElementById('urlDatas').textContent);
+      document.getElementById('list').replaceChildren(...items.map(it => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        const h3 = document.createElement('h3');
+        const p = document.createElement('p');
+        const tags = document.createElement('div');
+        a.className = 'card';
+        a.href = it.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        h3.textContent = `${it.icon} ${it.title}`;
+        p.textContent = it.desc;
+        tags.className = 'tags';
+        it.tags.forEach(t => {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = t;
+          tags.appendChild(span);
+        });
+        a.append(h3, p, tags);
+        li.append(a);
+        return li;
+      }));
+    }
+    搜索: {
+      const input = document.getElementById('search');
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+          card.classList.toggle('hidden', q && !card.innerText.toLowerCase().includes(q));
+        });
+      });
+    }
+    粒子特效: {
+      const cv = document.getElementById('particles');
+      const ctx = cv.getContext('2d');
+      let W, H, particles = [];
+      const resize = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; };
+      addEventListener('resize', resize); resize();
+      const rand = (min, max) => Math.random() * (max - min) + min;
+      const Particle = () => ({
+        x: rand(0, W), y: rand(0, H),
+        vx: rand(-0.3, 0.3), vy: rand(-0.5, -0.1),
+        r: rand(0.5, 2), a: rand(0.1, 0.6),
+        color: ['#7b68ee', '#ff6b6b', '#c8c8d0'][Math.floor(rand(0, 3))]
+      });
+      for (let i = 0; i < 80; i++) particles.push(Particle());
+      const draw = () => {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.y < -10) { p.y = H + 10; p.x = rand(0, W); }
+          if (p.x < -10) p.x = W + 10;
+          if (p.x > W + 10) p.x = -10;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.a;
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      };
+      draw();
+    }
+  </script>
+</body>
+
+</html>
